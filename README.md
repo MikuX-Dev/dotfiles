@@ -4,9 +4,9 @@ This repository contains my personal dotfiles for various configurations, includ
 
 ## Table of Contents
 
-- [Installation](#Installation)
-- [Configurations](#5.)
-- [License](#License)
+- [Installation](Installation)
+- [Configurations](5.)
+- [License](License)
 
 ## Installation
 
