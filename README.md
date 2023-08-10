@@ -5,9 +5,8 @@ This repository contains my personal dotfiles for various configurations, includ
 ## Table of Contents
 
 - [Installation](#Installation)
-- Usage
-- Configurations
-- License
+- [Configurations](#5.)
+- [License](#License)
 
 ## Installation
 
@@ -45,6 +44,6 @@ cd dotfiles && ./install.sh
 
 ## License
 
-This project is licensed under the MIT License. Feel free to use and modify the dotfiles as you see fit, but please give credit and provide a link back to this repository.
+This project is licensed under the [MIT License](https://github.com/MikuX-Dev/dotfiles/blob/master/LICENSE). Feel free to use and modify the dotfiles as you see fit, but please give credit and provide a link back to this repository.
 
 Enjoy your customized Arch Linux setup!
