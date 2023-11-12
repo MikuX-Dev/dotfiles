@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name = Open In Emacs
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=all/all;
+X-KDE-Priority=TopLevel
+Actions = openemacs
+
+[Desktop Action openemacs]
+Name = Open In Emacs
+Exec=/usr/bin/emacs %f
+Icon=emacs

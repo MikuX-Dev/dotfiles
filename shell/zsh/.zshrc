@@ -65,6 +65,20 @@ setopt promptsubst         # enable command substitution in prompt
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
 
+# configure key keybindings
+bindkey -e                                        # emacs key bindings
+bindkey ' ' magic-space                           # do history expansion on space
+bindkey '^U' backward-kill-line                   # ctrl + U
+bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+bindkey '^[[3~' delete-char                       # delete
+bindkey '^[[1;5C' forward-word                    # ctrl + ->
+bindkey '^[[1;5D' backward-word                   # ctrl + <-
+bindkey '^[[5~' beginning-of-buffer-or-history    # page up
+bindkey '^[[6~' end-of-buffer-or-history          # page down
+bindkey '^[[H' beginning-of-line                  # home
+bindkey '^[[F' end-of-line                        # end
+bindkey '^[[Z' undo                               # shift + tab undo last action
+
 # Uncomment the following line if pasting URLs and other text is messed up.
 DISABLE_MAGIC_FUNCTIONS="true"
 
@@ -105,54 +119,30 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git 
-  zsh-autosuggestions 
-  zsh-history-substring-search 
+  git
+  zsh-autosuggestions
+  zsh-history-substring-search
   zsh-syntax-highlighting
   sudo
 )
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-# Path
-export PATH="$HOME/go/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:$HOME/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/opt/bin:/usr/bin/core_perl:/usr/games/bin"
+# Source
+source $ZSH/oh-my-zsh.sh
 
-# Function to extract various types of archives
-ex() {
-	if [ -f $1 ]; then
-		case $1 in
-		*.tar.bz2) tar xjf $1 ;;
-		*.tar.gz) tar xzf $1 ;;
-		*.bz2) bunzip2 $1 ;;
-		*.rar) unrar x $1 ;;
-		*.gz) gunzip $1 ;;
-		*.tar) tar xf $1 ;;
-		*.tbz2) tar xjf $1 ;;
-		*.tgz) tar xzf $1 ;;
-		*.zip) unzip $1 ;;
-		*.Z) uncompress $1 ;;
-		*.7z) 7z x $1 ;;
-		*.deb) ar x $1 ;;
-		*.tar.xz) tar xf $1 ;;
-		*.tar.zst) tar xf $1 ;;
-		*) echo "'$1' cannot be extracted via ex()" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
-}
+# Path
+# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$HOME/go/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:$HOME/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/opt/bin:/usr/bin/core_perl:/usr/games/bin"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 #Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='helix'
-else
   export EDITOR='vim'
+else
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -215,11 +205,11 @@ alias free="free -h"
 # alias ls="ls --color=auto"
 # alias sl="ls --color=auto"
 # alias l="ls -ahls --color=auto"
-alias ls='exa -l --colour always'
-alias sl='exa -l --colour always'
-alias la='exa -l --colour always'
-alias l='exa --color-scale --group-directories-first -l --all'
-alias ll='exa --color-scale --group-directories-first -l --all'
+alias ls='exa -l --colour always --icons'
+alias sl='exa -l --colour always --icons'
+alias la='exa -l --colour always --icons'
+alias l='exa --color-scale --group-directories-first -l --all --icons'
+alias ll='exa --color-scale --group-directories-first -l --all --icons'
 
 # Text Editors:
 alias vim="vim"
@@ -274,10 +264,10 @@ alias gb="git branch"
 alias gf="git fetch"
 
 # Dotfiles Management (Assuming a specific directory setup):
-#alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-#alias dfa='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add'
-#alias dfc='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit'
-#alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push'
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dfa='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add'
+alias dfc='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit'
+alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push'
 
 # Miscellaneous:
 alias c="clear"
@@ -292,7 +282,7 @@ alias data="cd ~/Data-Linux/"
 # alias gh="cd ~/desktop/work/github"
 # alias gl="cd ~/desktop/work/gitlab"
 
-alias update='sudo pacman -Syyu' 
+alias update='sudo pacman -Syyu'
 alias upate='sudo pacman -Syyu'
 alias updte='sudo pacman -Syyu'
 alias updqte='sudo pacman -Syyu'
@@ -305,6 +295,33 @@ alias cleancache='yes | yay -Scc'
 
 alias poeweroff='sudo poeweroff'
 alias reboot='sudo reboot'
+
+# Functions
+
+# Function to extract various types of archives
+ex() {
+	if [ -f $1 ]; then
+		case $1 in
+		*.tar.bz2) tar xjf $1 ;;
+		*.tar.gz) tar xzf $1 ;;
+		*.bz2) bunzip2 $1 ;;
+		*.rar) unrar x $1 ;;
+		*.gz) gunzip $1 ;;
+		*.tar) tar xf $1 ;;
+		*.tbz2) tar xjf $1 ;;
+		*.tgz) tar xzf $1 ;;
+		*.zip) unzip $1 ;;
+		*.Z) uncompress $1 ;;
+		*.7z) 7z x $1 ;;
+		*.deb) ar x $1 ;;
+		*.tar.xz) tar xf $1 ;;
+		*.tar.zst) tar xf $1 ;;
+		*) echo "'$1' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
 
 netinfo() {
 # Display network interface information
@@ -339,17 +356,3 @@ whatsmyip () {
         echo "Unable to retrieve external IP address."
     fi
 }
-
-# configure key keybindings
-bindkey -e                                        # emacs key bindings
-bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^U' backward-kill-line                   # ctrl + U
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
-bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-bindkey '^[[6~' end-of-buffer-or-history          # page down
-bindkey '^[[H' beginning-of-line                  # home
-bindkey '^[[F' end-of-line                        # end
-bindkey '^[[Z' undo                               # shift + tab undo last action

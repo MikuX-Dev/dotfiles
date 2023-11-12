@@ -1,0 +1,7 @@
+ VteTerminal, vte-terminal {
+        padding: 30px;
+} 
+#launcher-2 * {
+    -gtk-icon-transform: scale(1.40);
+}
+

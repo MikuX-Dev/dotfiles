@@ -1,7 +1,7 @@
-## Author : Aditya Shakya (adi1090x)
-## Mail   : adi1090x@gmail.com
-## Github : @adi1090x
-## Reddit : @adi1090x
+## Author : MikuX-Dev (Meshachiel)
+## Mail   : MikuX_Dev@proton.me
+## Github : @MikuX-Dev
+## Reddit : @MikuX-Dev
 
 // Screen size
 screen.w = Window.GetWidth();
@@ -50,7 +50,7 @@ fun refresh_callback ()
     shutimg_sprite.SetImage(shutimg_image);
     }
   }
-  
+
 Plymouth.SetRefreshFunction (refresh_callback);
 
 //----------------------------------------- Progress Bar ---------------------------

@@ -1,0 +1,8 @@
+[user]
+indicatorStyle=2
+noWindowsListIfSingle=false
+forceIconSize=true
+iconSize=32
+keyComboActive=false
+pinned=/usr/share/applications/xfce-settings-manager.desktop;/usr/share/applications/firefox.desktop;/usr/share/applications/org.kde.dolphin.desktop;/usr/share/applications/kitty.desktop;/usr/share/applications/google-chrome.desktop;/usr/share/applications/org.manjaro.pamac.manager.desktop;
+indicatorColor=rgb(115,116,247)
