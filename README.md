@@ -6,12 +6,12 @@ This repository contains my personal dotfiles for various configurations, includ
 
 To use these dotfiles on Arch Linux, follow these steps:
 
-1. Clone the repository
+1. Clone the repository,
 ```
 git clone https://github.com/MikuX-Dev/dotfiles.git
 ```
 
-2. Install the necessary dependencies for each configuration. For example, if you're using the yay AUR helper:
+2. Execute the setup script,
 ```
 chmod +x setup.sh && ./setup.sh
 ```
@@ -19,6 +19,6 @@ Replace package-name with the actual package name required by your dotfiles. You
 
 ## License
 
-This project is licensed under the [GPL License](https://github.com/MikuX-Dev/dotfiles/blob/master/LICENSE). Feel free to use and modify the dotfiles as you see fit, but please give credit and provide a link back to this repository.
+This project is licensed under the [MIT License](https://github.com/MikuX-Dev/dotfiles/blob/master/LICENSE). Feel free to use and modify the dotfiles as you see fit, but please give credit and provide a link back to this repository.
 
 Enjoy your customized Arch Linux setup!
