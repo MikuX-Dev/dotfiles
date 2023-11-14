@@ -13,10 +13,10 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="archcraft"
+ZSH_THEME="powerlevel10k"
 
 # Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME="archcraft"
+# Setting this variable when ZSH_THEME="powerlevel10k"
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
@@ -29,7 +29,7 @@ ZSH_THEME="archcraft"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
-zstyle ':omz:update' mode disabled  # disable automatic updates
+zstyle ':omz:update' mode disabled # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # enable completion features
@@ -53,7 +53,7 @@ zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-setopt autocd              # change directory just by typing its name
+setopt autocd # change directory just by typing its name
 #setopt correct            # auto correct mistakes
 setopt interactivecomments # allow comments in interactive mode
 setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
@@ -66,18 +66,18 @@ setopt promptsubst         # enable command substitution in prompt
 # zstyle ':omz:update' frequency 13
 
 # configure key keybindings
-bindkey -e                                        # emacs key bindings
-bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^U' backward-kill-line                   # ctrl + U
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
-bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-bindkey '^[[6~' end-of-buffer-or-history          # page down
-bindkey '^[[H' beginning-of-line                  # home
-bindkey '^[[F' end-of-line                        # end
-bindkey '^[[Z' undo                               # shift + tab undo last action
+bindkey -e                                     # emacs key bindings
+bindkey ' ' magic-space                        # do history expansion on space
+bindkey '^U' backward-kill-line                # ctrl + U
+bindkey '^[[3;5~' kill-word                    # ctrl + Supr
+bindkey '^[[3~' delete-char                    # delete
+bindkey '^[[1;5C' forward-word                 # ctrl + ->
+bindkey '^[[1;5D' backward-word                # ctrl + <-
+bindkey '^[[5~' beginning-of-buffer-or-history # page up
+bindkey '^[[6~' end-of-buffer-or-history       # page down
+bindkey '^[[H' beginning-of-line               # home
+bindkey '^[[F' end-of-line                     # end
+bindkey '^[[Z' undo                            # shift + tab undo last action
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -130,6 +130,10 @@ plugins=(
 
 # Source
 source $ZSH/oh-my-zsh.sh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Path
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -163,9 +167,9 @@ zshcache_time="$(date +%s%N)"
 autoload -Uz add-zsh-hook
 
 rehash_precmd() {
-  if [[ -a /var/cache/zsh/pacman ]]; then
+  if [[ -e /var/cache/zsh/pacman ]]; then
     local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
-    if (( zshcache_time < paccache_time )); then
+    if ((zshcache_time < paccache_time)); then
       rehash
       zshcache_time="$paccache_time"
     fi
@@ -300,59 +304,59 @@ alias reboot='sudo reboot'
 
 # Function to extract various types of archives
 ex() {
-	if [ -f $1 ]; then
-		case $1 in
-		*.tar.bz2) tar xjf $1 ;;
-		*.tar.gz) tar xzf $1 ;;
-		*.bz2) bunzip2 $1 ;;
-		*.rar) unrar x $1 ;;
-		*.gz) gunzip $1 ;;
-		*.tar) tar xf $1 ;;
-		*.tbz2) tar xjf $1 ;;
-		*.tgz) tar xzf $1 ;;
-		*.zip) unzip $1 ;;
-		*.Z) uncompress $1 ;;
-		*.7z) 7z x $1 ;;
-		*.deb) ar x $1 ;;
-		*.tar.xz) tar xf $1 ;;
-		*.tar.zst) tar xf $1 ;;
-		*) echo "'$1' cannot be extracted via ex()" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
+  if [ -f $1 ]; then
+    case $1 in
+    *.tar.bz2) tar xjf $1 ;;
+    *.tar.gz) tar xzf $1 ;;
+    *.bz2) bunzip2 $1 ;;
+    *.rar) unrar x $1 ;;
+    *.gz) gunzip $1 ;;
+    *.tar) tar xf $1 ;;
+    *.tbz2) tar xjf $1 ;;
+    *.tgz) tar xzf $1 ;;
+    *.zip) unzip $1 ;;
+    *.Z) uncompress $1 ;;
+    *.7z) 7z x $1 ;;
+    *.deb) ar x $1 ;;
+    *.tar.xz) tar xf $1 ;;
+    *.tar.zst) tar xf $1 ;;
+    *) echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
 }
 
 netinfo() {
-# Display network interface information
-echo "---------- Network Interfaces ----------"
-ip -brief link show
+  # Display network interface information
+  echo "---------- Network Interfaces ----------"
+  ip -brief link show
 
-# Display IP address information
-echo "---------- IP Addresses ----------"
-ip -brief addr show
+  # Display IP address information
+  echo "---------- IP Addresses ----------"
+  ip -brief addr show
 
-# Display DNS settings
-echo "---------- DNS Settings ----------"
-grep nameserver /etc/resolv.conf
+  # Display DNS settings
+  echo "---------- DNS Settings ----------"
+  grep nameserver /etc/resolv.conf
 
-# Display network connections
-echo "---------- Network Connections ----------"
-ss -tunap
+  # Display network connections
+  echo "---------- Network Connections ----------"
+  ss -tunap
 
-# Display firewall settings
-# echo "---------- Firewall Settings ----------"
-# sudo iptables -L -v
+  # Display firewall settings
+  # echo "---------- Firewall Settings ----------"
+  # sudo iptables -L -v
 
-echo "----------"
+  echo "----------"
 }
 
-whatsmyip () {
-    echo "Fetching your external IP address..."
-    external_ip=$(curl -s https://api64.ipify.org?format=text)
-    if [ -n "$external_ip" ]; then
-        echo "Your external IP address is: $external_ip"
-    else
-        echo "Unable to retrieve external IP address."
-    fi
+whatsmyip() {
+  echo "Fetching your external IP address..."
+  external_ip=$(curl -s https://api64.ipify.org?format=text)
+  if [ -n "$external_ip" ]; then
+    echo "Your external IP address is: $external_ip"
+  else
+    echo "Unable to retrieve external IP address."
+  fi
 }
