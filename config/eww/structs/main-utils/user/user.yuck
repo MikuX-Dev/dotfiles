@@ -22,9 +22,9 @@
     (image :path "${PROFILE}"
            :image-width 180
            :class "logo-image")
-    (label :text "Your Name"
+    (label :text "Abinishanth"
            :class "logo-label")
-    (label :text "username@lhostname"
+    (label :text "Abinishanth@ArchFiery"
            :class "logo-hostname")))
 
 ; vim:ft=yuck:nowrap
