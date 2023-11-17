@@ -2,6 +2,9 @@
 
 This repository contains my personal dotfiles for various configurations, including themes, GTK, icons, grub theme, and wallpaper. Feel free to explore and use them as a reference or customize them for your own setup.
 
+>[!NOTE]
+>`mpzf` is just my zip file's
+
 ## Installation
 
 To use these dotfiles on Arch Linux, follow these steps:
