@@ -207,9 +207,9 @@ alias free="free -h"
 # alias l="ls -ahls --color=auto"
 alias ls='exa -l --colour always --icons'
 alias sl='exa -l --colour always --icons'
-alias la='exa -l --colour always --icons'
-alias l='exa --color-scale --group-directories-first -l --all --icons'
-alias ll='exa --color-scale --group-directories-first -l --all --icons'
+alias la='exa -la --colour always --icons'
+alias l='exa --colour always --group-directories-first -l --all --icons'
+alias ll='exa --colour always --group-directories-first -l --all --icons'
 
 # Text Editors:
 alias vim="vim"
@@ -296,8 +296,25 @@ alias cleancache='yes | yay -Scc'
 alias poeweroff='sudo poeweroff'
 alias reboot='sudo reboot'
 
-# Functions
+# Color for exa
+export EXA_COLORS="\
+uu=36:\
+gu=37:\
+sn=32:\
+sb=32:\
+da=34:\
+ur=34:\
+uw=35:\
+ux=36:\
+ue=36:\
+gr=34:\
+gw=35:\
+gx=36:\
+tr=34:\
+tw=35:\
+tx=36:"
 
+# Functions
 # Function to extract various types of archives
 ex() {
   if [ -f $1 ]; then
