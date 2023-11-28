@@ -216,8 +216,8 @@ alias vim="vim"
 alias svim='sudo vim'
 alias nv="nvim"
 alias snv="sudo nvim"
-alias he="helix"
-alias she="sudo helix"
+# alias he="helix"
+# alias she="sudo helix"
 alias edit="gedit"
 alias sedit="sudo gedit"
 
@@ -357,9 +357,9 @@ netinfo() {
   echo "---------- Network Connections ----------"
   ss -tunap
 
-  # Display firewall settings
-  # echo "---------- Firewall Settings ----------"
-  # sudo iptables -L -v
+  Display firewall settings
+  echo "---------- Firewall Settings ----------"
+  sudo iptables -L -v
 
   echo "----------"
 }
@@ -372,6 +372,29 @@ whatsmyip() {
   else
     echo "Unable to retrieve external IP address."
   fi
+}
+
+fontupdate() {
+  # Download and install nerd-fonts
+  fonts_url="https://github.com/ryanoasis/nerd-fonts/releases/latest"
+  font_files=("CascadiaCode.tar.xz" "Noto.tar.xz" "JetBrainsMono.tar.xz")
+  font_file_names=("CascadiaCode" "Noto" "JetBrainsMono")
+  for ((i = 0; i < ${#font_files[@]}; i++)); do
+    font_file=${font_files[i]}
+    font_name=${font_file_names[i]}
+    font_url=$(curl -sL ${fonts_url} | grep -o -E "https://.*${font_file}")
+    # Create a folder with the font name
+    mkdir -p "${font_name}"
+    # Download and extract the font
+    curl -L -o "${font_file}" "${font_url}"
+    tar -xvf "${font_file}" -C "${font_name}"
+    rm "${font_file}"
+    # Move the font folder to /usr/share/fonts/
+    mv "${font_name}" /usr/share/fonts/
+  done
+  # Update font cache
+  fc-cache -f -v
+  echo "Installation complete."
 }
 
 ### This should be in the last
