@@ -377,8 +377,8 @@ whatsmyip() {
 fontupdate() {
   # Download and install nerd-fonts
   fonts_url="https://github.com/ryanoasis/nerd-fonts/releases/latest"
-  font_files=("CascadiaCode.tar.xz" "Noto.tar.xz" "JetBrainsMono.tar.xz")
-  font_file_names=("CascadiaCode" "Noto" "JetBrainsMono")
+  font_files=("CascadiaCode.tar.xz" "Noto.tar.xz" "JetBrainsMono.tar.xz" "Meslo.tar.xz" "RobotoMono.tar.xz")
+  font_file_names=("CascadiaCode" "Noto" "JetBrainsMono" "Meslo" "RobotoMono")
   for ((i = 0; i < ${#font_files[@]}; i++)); do
     font_file=${font_files[i]}
     font_name=${font_file_names[i]}
@@ -394,7 +394,7 @@ fontupdate() {
   done
   # Update font cache
   fc-cache -f -v
-  echo "Installation complete."
+  echo "Update complete."
 }
 
 ### This should be in the last
