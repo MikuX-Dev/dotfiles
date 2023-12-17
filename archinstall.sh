@@ -233,14 +233,14 @@ if [ -d "/sys/firmware/efi/efivars" ]; then
 
   # Install grub
   print_color "${CYAN}" "Installing grub bootloader to '/mnt/boot/efi'"
-  grub-install --target=x86_64-efi --efi-directory=/mnt/boot/efi --bootloader-id=GRUB --recheck
+  grub-install --target=x86_64-efi --efi-directory=/mnt/boot/efi --bootloader-id=ArchLinux --recheck
   grub-mkconfig -o /boot/grub/grub.cfg
   printf "\n"
   read -rp "$(print_color "${YELLOW}" "Are you duel booting? [Y/n]: ")" duelb
   if [[ $duelb =~ ^[Yy] ]]; then
     printf "\n"
     read -rp "$(print_color "${YELLOW}" "Dose Windows detected in grub install? [Y/n]: ")" gi
-    if [[ $gi =~ ^[Yy]$ ]]; then
+    if [[ $gi =~ ^[Yy] ]]; then
       printf "\n"
       print_color "${CYAN}" "Skipping os-prober command"
     else
@@ -380,9 +380,9 @@ if [ -d "/sys/firmware/efi/efivars" ]; then
   print_color "${CYAN}" "Setting up hosts file"
   printf "\n"
   cat >>/etc/host <<EOF
-echo "127.0.0.1       localhost"
-echo "::1             localhost"
-echo "127.0.1.1       $hostname.localdomain $hostname"
+127.0.0.1       localhost
+::1             localhost
+127.0.1.1       $hostname.localdomain $hostname
 EOF
   cat /etc/hosts
   sleep 5s
