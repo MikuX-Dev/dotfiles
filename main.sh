@@ -531,8 +531,6 @@ EOF
   clear
 
   # Personal dotfiles
-  #TODO: add starship promt for .zshrc with starship config in screenshot in your Gphotos and add the .p10k file config to starship configuration.
-
   print_color "${CYAN}" "Setting up Personal dotfiles"
   git clone https://github.com/MikuX-Dev/dotfiles.git "$DOT"
   clear

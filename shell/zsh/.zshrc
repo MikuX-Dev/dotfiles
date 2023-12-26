@@ -3,6 +3,22 @@
 #~/bin/fastestmirror.sh
 #echo "Wait, Getting the fastest mirror!"
 
+# Load starship prompt if starship is installed
+if [ -x /usr/bin/starship ]; then
+  __main() {
+    local major="${BASH_VERSINFO[0]}"
+    local minor="${BASH_VERSINFO[1]}"
+
+    if ((major > 4)) || { ((major == 4)) && ((minor >= 1)); }; then
+      source <("/usr/bin/starship" init bash --print-full-init)
+    else
+      source /dev/stdin <<<"$("/usr/bin/starship" init bash --print-full-init)"
+    fi
+  }
+  __main
+  unset -f __main
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -205,11 +221,17 @@ alias free="free -h"
 # alias ls="ls --color=auto"
 # alias sl="ls --color=auto"
 # alias l="ls -ahls --color=auto"
-alias ls='exa -l --colour always --icons'
-alias sl='exa -l --colour always --icons'
-alias la='exa -la --colour always --icons'
-alias l='exa --colour always --group-directories-first -l --all --icons'
-alias ll='exa --colour always --group-directories-first -l --all --icons'
+# alias ls='exa -l --colour always --icons'
+# alias sl='exa -l --colour always --icons'
+# alias la='exa -la --colour always --icons'
+# alias l='exa --colour always --group-directories-first -l --all --icons'
+# alias ll='exa --colour always --group-directories-first -l --all --icons'
+# Replace ls with exa
+alias ls='exa -al --color=always --group-directories-first --icons'     # preferred listing
+alias la='exa -a --color=always --group-directories-first --icons'      # all files and dirs
+alias ll='exa -l --color=always --group-directories-first --icons'      # long format
+alias lt='exa -aT --color=always --group-directories-first --icons'     # tree listing
+alias l.='exa -ald --color=always --group-directories-first --icons .*' # show only dotfiles
 
 # Text Editors:
 alias vim="vim"
