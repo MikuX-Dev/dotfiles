@@ -298,6 +298,19 @@ alias dfa='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add'
 alias dfc='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit'
 alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push'
 
+# Pacman Shortcuts
+alias sync="sudo pacman -Syyy"
+alias install="sudo pacman -S"
+alias update="sudo pacman -Syyu"
+alias search="sudo pacman -Ss"
+alias search-local="sudo pacman -Qs"
+alias pkg-info="sudo pacman -Qi"
+alias local-install="sudo pacman -U"
+alias clr-cache="sudo pacman -Scc"
+alias unlock="sudo rm /var/lib/pacman/db.lck"
+alias remove="sudo pacman -R"
+alias autoremove="sudo pacman -Rns"
+
 # Miscellaneous:
 alias c="clear"
 alias q="exit"
