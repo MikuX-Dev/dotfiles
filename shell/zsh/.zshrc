@@ -1,7 +1,9 @@
-# exec on open terminal
-~/bin/random_script_runner.sh
-#~/bin/fastestmirror.sh
-#echo "Wait, Getting the fastest mirror!"
+#
+# ~/.zshrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 # Load starship prompt if starship is installed
 if [ -x /usr/bin/starship ]; then
@@ -18,6 +20,11 @@ if [ -x /usr/bin/starship ]; then
   __main
   unset -f __main
 fi
+
+# exec on open terminal
+~/bin/random_script_runner.sh
+#~/bin/fastestmirror.sh
+#echo "Wait, Getting the fastest mirror!"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -335,6 +342,9 @@ gx=36:\
 tr=34:\
 tw=35:\
 tx=36:"
+
+# Display ISO version and distribution information in short
+alias version="sed -n 1p /etc/os-release && sed -n 12p /etc/os-release && sed -n 13p /etc/os-release"
 
 # Functions
 # Function to extract various types of archives
