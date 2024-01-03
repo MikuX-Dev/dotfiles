@@ -1,7 +1,9 @@
-# exec on open terminal
-~/bin/random_script_runner.sh
-#~/bin/fastestmirror.sh
-#echo "Wait, Getting the fastest mirror!"
+#
+# ~/.zshrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 # Load starship prompt if starship is installed
 if [ -x /usr/bin/starship ]; then
@@ -18,6 +20,11 @@ if [ -x /usr/bin/starship ]; then
   __main
   unset -f __main
 fi
+
+# exec on open terminal
+~/bin/random_script_runner.sh
+#~/bin/fastestmirror.sh
+#echo "Wait, Getting the fastest mirror!"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -291,6 +298,19 @@ alias dfa='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add'
 alias dfc='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit'
 alias dfp='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push'
 
+# Pacman Shortcuts
+alias sync="sudo pacman -Syyy"
+alias install="sudo pacman -S"
+alias update="sudo pacman -Syyu"
+alias search="sudo pacman -Ss"
+alias search-local="sudo pacman -Qs"
+alias pkg-info="sudo pacman -Qi"
+alias local-install="sudo pacman -U"
+alias clr-cache="sudo pacman -Scc"
+alias unlock="sudo rm /var/lib/pacman/db.lck"
+alias remove="sudo pacman -R"
+alias autoremove="sudo pacman -Rns"
+
 # Miscellaneous:
 alias c="clear"
 alias q="exit"
@@ -335,6 +355,9 @@ gx=36:\
 tr=34:\
 tw=35:\
 tx=36:"
+
+# Display ISO version and distribution information in short
+alias version="sed -n 1p /etc/os-release && sed -n 12p /etc/os-release && sed -n 13p /etc/os-release"
 
 # Functions
 # Function to extract various types of archives
