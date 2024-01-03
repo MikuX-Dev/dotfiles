@@ -1,3 +1,5 @@
+~/bin/random_script_runner.sh
+
 ## Set values
 # Hide welcome message & ensure we are reporting fish as shell
 set fish_greeting
@@ -7,7 +9,7 @@ set -x SHELL /usr/bin/fish
 
 ## Export variable need for qt-theme
 if type "qtile" >> /dev/null 2>&1
-   set -x QT_QPA_PLATFORMTHEME "qt5ct"
+  set -x QT_QPA_PLATFORMTHEME "qt5ct"
 end
 
 # Set settings for https://github.com/franciscolourenco/done
@@ -38,7 +40,7 @@ end
 
 ## Starship prompt
 if status --is-interactive
-   source ("/usr/bin/starship" init fish --print-full-init | psub)
+  source ("/usr/bin/starship" init fish --print-full-init | psub)
 end
 
 
@@ -74,6 +76,64 @@ else
   bind ! __history_previous_command
   bind '$' __history_previous_command_arguments
 end
+
+ex() {
+  if [ -f $1 ]; then
+    case $1 in
+    *.tar.bz2) tar xjf $1 ;;
+    *.tar.gz) tar xzf $1 ;;
+    *.bz2) bunzip2 $1 ;;
+    *.rar) unrar x $1 ;;
+    *.gz) gunzip $1 ;;
+    *.tar) tar xf $1 ;;
+    *.tbz2) tar xjf $1 ;;
+    *.tgz) tar xzf $1 ;;
+    *.zip) unzip $1 ;;
+    *.Z) uncompress $1 ;;
+    *.7z) 7z x $1 ;;
+    *.deb) ar x $1 ;;
+    *.tar.xz) tar xf $1 ;;
+    *.tar.zst) tar xf $1 ;;
+    *) echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+netinfo() {
+  # Display network interface information
+  echo "---------- Network Interfaces ----------"
+  ip -brief link show
+
+  # Display IP address information
+  echo "---------- IP Addresses ----------"
+  ip -brief addr show
+
+  # Display DNS settings
+  echo "---------- DNS Settings ----------"
+  grep nameserver /etc/resolv.conf
+
+  # Display network connections
+  echo "---------- Network Connections ----------"
+  ss -tunap
+
+  Display firewall settings
+  echo "---------- Firewall Settings ----------"
+  sudo iptables -L -v
+
+  echo "----------"
+}
+
+whatsmyip() {
+  echo "Fetching your external IP address..."
+  external_ip=$(curl -s https://api64.ipify.org?format=text)
+  if [ -n "$external_ip" ]; then
+    echo "Your external IP address is: $external_ip"
+  else
+    echo "Unable to retrieve external IP address."
+  fi
+}
 
 # Fish command history
 function history
@@ -114,9 +174,9 @@ alias l. 'eza -ald --color=always --group-directories-first --icons .*' # show o
 
 # Replace some more things with better alternatives
 alias cat 'bat --style header --style snip --style changes --style header'
-if not test -x /usr/bin/yay; and test -x /usr/bin/paru
-    alias yay 'paru'
-end
+# if not test -x /usr/bin/yay; and test -x /usr/bin/paru
+#     alias yay 'paru'
+# end
 
 
 # Common use
@@ -140,9 +200,14 @@ alias psmem10 'ps auxf | sort -nr -k 4 | head -10'
 alias rmpkg 'sudo pacman -Rdd'
 alias tarnow 'tar -acf '
 alias untar 'tar -zxvf '
-alias upd '/usr/bin/garuda-update'
+alias update 'yay -Syyu'
 alias vdir 'vdir --color=auto'
 alias wget 'wget -c '
+alias shred 'shred -zf'
+alias files 'ranger'
+alias cleancache 'yes | yay -Scc'
+alias poeweroff 'sudo poeweroff'
+alias reboot 'sudo reboot'
 
 # Get fastest mirrors
 alias mirror 'sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist'
@@ -164,7 +229,35 @@ alias jctl 'journalctl -p 3 -xb'
 # Recent installed packages
 alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
-## Run fastfetch if session is interactive
-if status --is-interactive && type -q fastfetch
-   fastfetch --load-config dr460nized
-end
+# Version Control (Git):
+alias g 'git'
+alias gst 'git status'
+alias gc 'git commit -m '
+alias ga 'git add'
+alias gpl 'git pull'
+alias gpom 'git pull origin master'
+alias gpu 'git push'
+alias gpuom 'git push origin master'
+alias gd 'git diff'
+alias gch 'git checkout'
+alias gnb 'git checkout -b'
+alias gac 'git add . && git commit -m'
+alias grs 'git restore --staged .'
+alias gre 'git restore'
+alias gr 'git remote'
+alias gcl 'git clone'
+alias glg "git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias gt 'git ls-tree -r master --name-only'
+alias grm 'git remote'
+alias gb 'git branch'
+alias gf 'git fetch'
+
+# Dotfiles Management (Assuming a specific directory setup):
+alias dot '/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dfa '/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add'
+alias dfc '/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit'
+alias dfp '/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push'
+
+# Miscellaneous:
+alias c 'clear'
+alias q 'exit'
